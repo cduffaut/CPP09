@@ -13,6 +13,8 @@ class ReversePolishNotation
     public:
         ReversePolishNotation();
         ~ReversePolishNotation();
+        ReversePolishNotation(ReversePolishNotation const &other);
+        ReversePolishNotation &operator=(ReversePolishNotation const &other);
 
         void treatment(std::string polishLine);
         long int calculation(int nbr, int nbr2, char ope);

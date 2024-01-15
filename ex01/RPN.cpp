@@ -4,6 +4,13 @@ ReversePolishNotation::ReversePolishNotation(){}
 
 ReversePolishNotation::~ReversePolishNotation(){}
 
+ReversePolishNotation::ReversePolishNotation(ReversePolishNotation const &other) {}
+
+ReversePolishNotation &ReversePolishNotation::operator=(ReversePolishNotation const &other)
+{
+    return (*this);
+}
+
 void ReversePolishNotation::treatment(std::string polishLine)
 {
     int ope = 0;
