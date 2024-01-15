@@ -28,6 +28,8 @@ class PmergeMe
     public:
             PmergeMe();
             ~PmergeMe();
+            PmergeMe (PmergeMe const &other);
+            PmergeMe &operator=(PmergeMe const &other);
 };
 
 # endif

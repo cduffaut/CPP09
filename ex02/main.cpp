@@ -185,8 +185,8 @@ int main(int argc, char **argv)
         dequeContainer.push_back(std::make_pair(std::atoi(argv[i]), std::atoi(argv[i + 1])));
     }
 
-    // Create two new other vectors
-    std::vector<int> stockMin, stockMax;
+    // Create two new other deques
+    std::deque<int> stockMin, stockMax;
 
     // Launch the alorithm to perform the sorting
     merge_insert(argc, argv, dequeContainer, stockMin, stockMax, DEQUE, is_odd, last_nbr);
