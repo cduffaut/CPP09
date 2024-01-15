@@ -20,6 +20,8 @@ class BitcoinExchange
     public:
         BitcoinExchange();
         ~BitcoinExchange();
+        BitcoinExchange(BitcoinExchange const &other);
+        BitcoinExchange &operator=(BitcoinExchange const &other);
 
         void    initRateFile();
         void    initInput(std::string argv);

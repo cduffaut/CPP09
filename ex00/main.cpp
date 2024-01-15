@@ -52,14 +52,14 @@ int BitcoinExchange::parsingData(long int year, long int month, long int day, st
 		// isdigit() return pos nbr if value is decimal (0-9).
         // No dot has been found.
 		// if there is too much dots.
-		if ((!(isdigit(btc[i])) && btc[i] != '.' && pipeCounter > 1) || dotCounter > 1)
+		if ((!(isdigit(btc[i])) && btc[i] != '.' && btc[i] != '|') || pipeCounter > 1 || dotCounter > 1)
 		{
 			std::cerr << "Error: bad input => " << line << std::endl;
-			return (1);				
+			return (1);
 		}
 	}
 
-	// Check the "taux" if it's valid. (0-1000)
+	// Check the rate (taux) if it's valid. (0-1000)
 	if (fBtc < 0)
 	{
 		std::cerr << "Error: not a positive number." << std::endl;
@@ -144,7 +144,7 @@ void BitcoinExchange::initInput(std::string argv)
 			date = std::to_string(year) + std::to_string(month) + std::to_string(day);
 		}
 
-		// If parsing_data return != 0 it stop
+		// If parsing_data return != 0 it does not display the default output
         // Else: out-puting the "result"
 		if (parsingData(year, month, day, btc, fBtc, line) == 0)
 			displayOutput(date, fBtc);
@@ -196,6 +196,13 @@ void	BitcoinExchange::initRateFile()
     std::string     line;
 
     fd.open("./data.csv");
+
+	// Check if the opening failed.
+    if (fd.fail())
+    {
+        std::cerr << "Error: could not open file." << std::endl;
+		exit (1);
+	}
     // 'til the file reading did not reach the end (eof)
     while (!fd.eof())
     {
@@ -206,7 +213,7 @@ void	BitcoinExchange::initRateFile()
 		// stringstream will allow us to convert value.
     	std::stringstream   converter;
 
-        // Take pos on the first ele of the rate.
+        // Take pos on the first ele of the rate (taux).
         converter << line.substr(11);
 		// taux.
     	float	rate = 0.0;
